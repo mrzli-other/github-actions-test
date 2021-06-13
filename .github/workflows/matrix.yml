@@ -31,4 +31,4 @@ jobs:
         run: |
           node -v
           echo ${IS_UBUNTU_8}
-          echo ${{ matrix.is_ubuntu_8 }}
+          # echo ${{ matrix.is_ubuntu_8 }}
