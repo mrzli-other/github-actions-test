@@ -1,12 +1,29 @@
 name: Actions Workflow
 
 on:
-  repository_dispatch:
-    types: [build]
-    #  schedule:
+  push:
+    branches:
+      - master
+      - 'feature/*' # matches: feature/featA, feature/featB; doesn't match: feature/feat/a
+      - 'feature/**'
+      - '!feature/featC' # do not match: feature/featC
+    # branches-ignore:
+    #  - somebranch
+    # tags:
+    #   - v1.*
+    # tags-ignore:
+    #   - v2.*
+    # paths:
+    #  - '**.js'
+    #  - '!filename.js'
+    # paths-ignore:
+    #  - 'docs/**'
+#  repository_dispatch:
+#    types: [build]
+#  schedule:
 #    - cron: "0/5 * * * *"
 #    - cron: "0/6 * * * *"
-    # push:
+#  push:
   pull_request:
     types: [opened, reopened, assigned, closed]
 
@@ -14,7 +31,7 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
-      - name: SHow Dispatch Payload
+      - name: Show Dispatch Payload
         run: echo ${{ github.event.client_payload.env }}
       - name: List Files
         run: |
